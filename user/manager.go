@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/mattn/go-sqlite3"
 	"github.com/stripe/stripe-go/v74"
 	"golang.org/x/crypto/bcrypt"
 	"heckel.io/ntfy/log"
@@ -685,9 +684,9 @@ func (a *Manager) readPhoneNumber(rows *sql.Rows) (string, error) {
 // AddPhoneNumber adds a phone number to the user with the given user ID
 func (a *Manager) AddPhoneNumber(userID string, phoneNumber string) error {
 	if _, err := a.db.Exec(insertPhoneNumberQuery, userID, phoneNumber); err != nil {
-		if sqliteErr, ok := err.(sqlite3.Error); ok && sqliteErr.ExtendedCode == sqlite3.ErrConstraintUnique {
-			return ErrPhoneNumberExists
-		}
+		//if sqliteErr, ok := err.(sqlite3.Error); ok && sqliteErr.ExtendedCode == sqlite3.ErrConstraintUnique {
+		//	return ErrPhoneNumberExists
+		//}
 		return err
 	}
 	return nil
@@ -866,9 +865,9 @@ func (a *Manager) AddUser(username, password string, role Role) error {
 	userID := util.RandomStringPrefix(userIDPrefix, userIDLength)
 	syncTopic, now := util.RandomStringPrefix(syncTopicPrefix, syncTopicLength), time.Now().Unix()
 	if _, err = a.db.Exec(insertUserQuery, userID, username, hash, role, syncTopic, now); err != nil {
-		if sqliteErr, ok := err.(sqlite3.Error); ok && sqliteErr.ExtendedCode == sqlite3.ErrConstraintUnique {
-			return ErrUserExists
-		}
+		//if sqliteErr, ok := err.(sqlite3.Error); ok && sqliteErr.ExtendedCode == sqlite3.ErrConstraintUnique {
+		//	return ErrUserExists
+		//}
 		return err
 	}
 	return nil

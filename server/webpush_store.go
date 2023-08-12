@@ -7,7 +7,7 @@ import (
 	"net/netip"
 	"time"
 
-	_ "github.com/mattn/go-sqlite3" // SQLite driver
+	_ "github.com/momodezhou/sqlite" // SQLite driver
 )
 
 const (

@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	_ "github.com/mattn/go-sqlite3" // SQLite driver
+	_ "github.com/momodezhou/sqlite" // SQLite driver
 	"heckel.io/ntfy/log"
 	"heckel.io/ntfy/util"
 )
